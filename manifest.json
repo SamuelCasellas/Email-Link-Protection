@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Filter email",
+  "description": "Replace all links in emails as plain text",
+  "version": "0.1.0",
+    
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["script.js"]
+    }
+  ]
+}
