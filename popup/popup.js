@@ -1,8 +1,8 @@
 let url;
 
-chrome.runtime.sendMessage({}, function(response) {
-  url = response.href
-  document.getElementById("id").textContent = url;
+chrome.runtime.sendMessage({/* No context needed */}, function(response) {
+  url = response.url
+  document.getElementById("link").textContent = url;
 });
 
 // Add click listeners to the buttons
