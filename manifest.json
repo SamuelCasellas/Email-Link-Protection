@@ -1,17 +1,19 @@
 {
   "manifest_version": 3,
-  "name": "Filter email",
-  "description": "Buffer all links in emails.",
+  "name": "Care-Free Email",
+  "description": "Buffer all links in emails to avoid viruses.",
   "version": "1.0",
   "permissions": [
     "tabs"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "action": {
-    "default_title": "Link Buffer",
-    "default_popup": "popup/popup.html"
+    "default_icon": "ext_img.png"
+  //   "default_title": "Link Buffer",
+  //   "default_popup": "popup/popup.html"
   },
 
   "content_scripts": [
@@ -19,12 +21,9 @@
       "matches": ["https://mail.google.com/*"],
       "js": ["content.js"]
     }
-  ]
+  ],
 
-  // "action": {
-  //   "default_icon": "Cursing-Extension-Icon.png"
-  // },
-  // "icons": {
-  //   "128": "Cursing-Extension-Icon.png"
-  // }
+  "icons": {
+    "128": "ext_img.png"
+  }
 }

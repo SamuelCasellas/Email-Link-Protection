@@ -2,6 +2,7 @@ let url;
 
 chrome.runtime.sendMessage({/* No context needed */}, function(response) {
   url = response.url
+  if (!url) url = "(Link already clicked. Use the forward arrow to navigate to it.)"
   document.getElementById("link").textContent = url;
 });
 

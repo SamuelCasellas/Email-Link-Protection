@@ -9,6 +9,19 @@
         left: 50%;
         transform: translate(-50%, -50%);
         font-family: Arial, sans-serif;
+        
+        background-image: url("blur_img.png");
+        background-repeat: repeat-y;
+        background-size: 100%;
+        background-position-x: center;
+      }
+
+      article {
+        background-color: whitesmoke;
+        width: 103%;
+        padding: 20px;
+        border: rgb(116, 128, 128) 0.5px solid;
+        border-radius: 5px;
       }
 
       h2 {
@@ -18,7 +31,8 @@
       button {
         display: block;
         position: relative;
-        margin: 120px 35px 0 0;
+        height: 50px;
+        margin: 120px 35px 0 50px;
         padding: 5px 100px;
         background-color: #4CAF50;
         color: white;
@@ -55,15 +69,17 @@
     </style>
   </head>
   <body>
-    <h2>Link Buffer</h2>
-    <p>Are you sure you want to go to this link?</p>
-    <div id="link-content">
-      <p id="link"></p>
-      <div style="display: flex;">
-        <button id="back">Go Back</button>
-        <button id="proceed">Proceed</button>
+    <article>
+      <h2>Link Buffer</h2>
+      <p>Are you sure you want to go to this link?</p>
+      <div id="link-content">
+        <p id="link"></p>
+        <div style="display: flex;">
+          <button id="back">Go Back</button>
+          <button id="proceed">Proceed</button>
+        </div>
       </div>
-    </div>
+    </article>
     <script src="popup.js"></script>
   </body>
 </html>
