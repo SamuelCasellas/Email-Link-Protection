@@ -1,21 +1,31 @@
-htmlLink = (event) => {
-  console.log(event.target.tagName);
-  if (event.target.tagName !== "A") return; // Non-A event falls by the wayside
-    // Prevent the link from opening
+const htmlLink = (event) => {
+  const closestAnchor = event.target.closest("a");
+  if (!closestAnchor) return;
+  
+  const url = closestAnchor.href;
+  if (url.match(/tel:|mailto:/)) return;
 
-  console.log(event.target.tagName);
+  // Load full message link (gmail)
+  if (url.includes("mail.google.com/mail/u/")) return;
+  
+  // Prevent the link from opening
   event.preventDefault();
 
   // Send a message to the extension with the link href
-  chrome.runtime.sendMessage({ url: event.target.href });
+  console.log("About to send this link:", url);
+  chrome.runtime.sendMessage({ url });
 };
 
-blockJsLink = (event) => {
+const blockJsLink = (event) => {
   const link = event.target.closest("a");
-  if (!link) return false;
 
   // Check if the link has a JavaScript onclick attribute
-  const onclick = link.getAttribute("onclick");
+  let onclick;
+  try {
+    onclick = link.getAttribute("onclick");
+  } catch (_) {
+    return false;
+  }
   if (!onclick) return false;
 
   // Intercept click event
@@ -25,8 +35,28 @@ blockJsLink = (event) => {
   return true;
 };
 
-document.addEventListener("click", function(event) {
-  if (!blockJsLink(event)) htmlLink(event);
-});
+const listenerCallback = (e) => {
+  if (!blockJsLink(e)) htmlLink(e);
+};
 
-    
+let currentEmails = [];
+const searchEmailWindows = () => {
+  // Email Container class list
+  const emailsShowing = document.querySelectorAll(".adn.ads");
+  if (emailsShowing.length === currentEmails.length) return;
+  
+  currentEmails = emailsShowing;
+  currentEmails.forEach(w => 
+    w.addEventListener("click", listenerCallback)
+  );
+};
+
+// Initial load (give 5 seconds)
+setTimeout(() => searchEmailWindows(), 5000);
+
+// Added Node MO must always be kept on.
+new MutationObserver(() =>
+  // email window
+  searchEmailWindows()
+).observe(document.body, {childList: true, subtree: true});
+  
