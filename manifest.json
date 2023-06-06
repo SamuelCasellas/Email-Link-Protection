@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Care-Free Email",
   "description": "Buffer all links in emails to avoid viruses.",
-  "version": "1.0",
+  "version": "1.0.1",
   "permissions": [
     "tabs"
   ],
