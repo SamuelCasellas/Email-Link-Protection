@@ -1,9 +1,5 @@
-const port = chrome.runtime.connect({name: "emaillinks"});
-
 const htmlLink = (event) => {
-  console.log("Click!");
   const closestAnchor = event.target.closest("a");
-  debugger;
   if (!closestAnchor) return;
   
   const url = closestAnchor.href;
@@ -17,9 +13,7 @@ const htmlLink = (event) => {
 
   // Send a message to the extension with the link href
   console.log("About to send this link:", url);
-
-  // chrome.runtime.sendMessage({ url });
-  port.postMessage({ url });
+  chrome.runtime.sendMessage({ url });
 };
 
 const blockJsLink = (event) => {
