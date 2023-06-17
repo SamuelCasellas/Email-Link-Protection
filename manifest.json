@@ -2,9 +2,10 @@
   "manifest_version": 3,
   "name": "Care-Free Email",
   "description": "Buffer all links in emails to avoid viruses.",
-  "version": "1.0.1",
+  "version": "1.1",
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "background": {
     "service_worker": "background.js",
@@ -17,7 +18,7 @@
   "content_scripts": [
     {
       "matches": ["https://mail.google.com/*"],
-      "js": ["content.js"]
+      "js": ["chromeStorageFunctions.js" ,"content.js"]
     }
   ],
 

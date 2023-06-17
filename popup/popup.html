@@ -18,7 +18,7 @@
 
       article {
         background-color: whitesmoke;
-        width: 103%;
+        width: 106.5%;
         padding: 20px;
         border: rgb(116, 128, 128) 0.5px solid;
         border-radius: 5px;
@@ -33,13 +33,29 @@
         position: relative;
         height: 50px;
         margin: 120px 35px 0 50px;
-        padding: 5px 100px;
+        padding: 5px 80px;
         background-color: #4CAF50;
         color: white;
         border: none;
         border-radius: 4px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      label, input {
+        display: block;
+        position: relative;
+        height: 50px;
+        margin-top: 120px;
+        padding-left: 10px;
+        /* padding: 5px 100px; */
+      }
+
+      label {
+        margin-top: 10.1em;
       }
 
       button:hover {
@@ -76,7 +92,9 @@
         <p id="link"></p>
         <div style="display: flex;">
           <button id="back">Go Back</button>
-          <button id="proceed">Proceed</button>
+          <button id="continue">Continue</button>
+          <input type="checkbox" id="always-allow">
+          <label for="always-allow" id="always-allow-label">sample.name.com</label>
         </div>
       </div>
     </article>
