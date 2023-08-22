@@ -1,103 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Link Buffer</title>
-    <style>
-      body {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-family: Arial, sans-serif;
-        
-        background-image: url("blur_img.png");
-        background-repeat: repeat-y;
-        background-size: 100%;
-        background-position-x: center;
-      }
-
-      article {
-        background-color: whitesmoke;
-        width: 106.5%;
-        padding: 20px;
-        border: rgb(116, 128, 128) 0.5px solid;
-        border-radius: 5px;
-      }
-
-      h2 {
-        margin-top: 0;
-      }
-
-      button {
-        display: block;
-        position: relative;
-        height: 50px;
-        margin: 120px 35px 0 50px;
-        padding: 5px 80px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-        white-space: nowrap;
-        overflow: hidden;
-        text-align: center;
-      }
-
-      label, input {
-        display: block;
-        position: relative;
-        height: 50px;
-        margin-top: 120px;
-        padding-left: 10px;
-        /* padding: 5px 100px; */
-      }
-
-      label {
-        margin-top: 10.1em;
-      }
-
-      button:hover {
-        background-color: #3e8e41;
-        transform: scale(1.05);
-      }
-
-      #link-content {
-        height: fit-content;
-      }
-
-      #link {
-        width: 100%;
-        height: 100%;
-        max-width: 100%;
-        max-height: 92px !important;
-        border: 1px #dcdada solid;
-        border-radius: 5px;
-        padding: 10px;
-        margin-top: -8px;
-        position: absolute;
-        color: rgb(61, 61, 255) !important;
-        font-style: italic;
-        word-wrap: break-word;
-        overflow: scroll;
-      }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Shield</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
   </head>
   <body>
     <article>
-      <h2>Link Buffer</h2>
+      <h2>Link Shield</h2>
       <p>Are you sure you want to go to this link?</p>
       <div id="link-content">
         <p id="link"></p>
-        <div style="display: flex;">
+        <div class="flex">
           <button id="back">Go Back</button>
           <button id="continue">Continue</button>
-          <input type="checkbox" id="always-allow">
-          <label for="always-allow" id="always-allow-label">sample.name.com</label>
+          <div style="margin-top: 100px;">
+            <div class="flex option-container">
+              <input type="checkbox" id="always-allow">
+              <label for="always-allow" id="always-allow-label">Always allow sample.name.com.com.com.com.com.com.com.com links</label>
+            </div>
+            <div class="flex option-container">
+              <input type="checkbox" id="i-trust-sender">
+              <label for="i-trust-sender" id="i-trust-sender-label">I trust email@sample.com.com.com.com.com.com.com.com</label>
+            </div>
+          </div>
         </div>
       </div>
     </article>
+    <script src="../chromeStorageFunctions.js"></script>
+    <script src="../chromeMessagingFunctions.js"></script>
+    <script src="../urlFunctions.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>

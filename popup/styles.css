@@ -1,0 +1,100 @@
+body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Arial, sans-serif;
+  background-image: url("blur_img.png");
+  background-repeat: repeat-y;
+  background-size: 100%;
+  background-position-x: center;
+}
+
+article {
+  background-color: whitesmoke;
+  width: 106.5%;
+  padding: 20px;
+  border: rgb(116, 128, 128) 0.5px solid;
+  border-radius: 5px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+p, label {
+  font-size: 16px;
+}
+
+button {
+  display: block;
+  position: relative;
+  height: 50px;
+  margin: 130px 25px 0 25px;
+  padding: 5px 80px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+label {
+  margin-left: 10px;
+}
+
+button:hover {
+  background-color: #3e8e41;
+  transform: scale(1.05);
+}
+
+#link-content {
+  height: fit-content;
+}
+
+#link {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 92px !important;
+  border: 1px #dcdada solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: -8px;
+  position: absolute;
+  color: rgb(61, 61, 255) !important;
+  font-style: italic;
+  word-wrap: break-word;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#link::-webkit-scrollbar {
+  width: 10px;
+}
+
+#link::-webkit-scrollbar-thumb {
+  background-color: #afafaf;
+  border-radius: 5px;
+}
+
+#link::-webkit-scrollbar-track {
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+.option-container {
+  margin-top: 21px;
+}
+
+.option-container:not(:nth-child(1)) {
+  margin-top: 16px;
+}
+
+.flex {
+  display: flex;
+}
