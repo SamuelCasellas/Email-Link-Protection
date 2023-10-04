@@ -28,6 +28,15 @@ const getChromeAttr = (key, defaultVal=null) => {
 };
 
 /**
+ * Remove a key and its corresponding value from Chrome sync storage.
+ *
+ * @param {string} key - The key to remove
+ * @returns {void}
+ */
+const removeChromeAttr = (key) =>
+  chrome.storage.sync.remove(key);
+
+/**
  * Retrieve a set of values associated with sequential keys from Chrome sync storage.
  *
  * @param {string} keyName - The base name of the keys to retrieve values from.
@@ -38,7 +47,7 @@ const getSetOfValuesFromStorage = async function(keyName) {
   let n = 0;
   while (true) {
     var nextItem = await getChromeAttr(`${keyName}${n}`);
-    if (!nextItem) break;
+    if (nextItem == null) break;
     setToReturn.add(nextItem);
     n++;
   }
@@ -54,9 +63,49 @@ const getSetOfValuesFromStorage = async function(keyName) {
  */
 const addValueToSetOfValuesInStorage = async(key, val) => {
   let thisN = await getChromeAttr(`${key}-count`, -1);
-
   setChromeAttr(`${key}-count`, ++thisN)
   setChromeAttr(`${key}${thisN}`, val);
+};
+
+/**
+ * Remove a value from a set of sequential values in Chrome sync storage and clean up the chain.
+ *
+ * @param {string} key - The base name of the keys representing the set of values.
+ * @param {any} val - The value to be removed from the set.
+ * @returns {void}
+ */
+const removeValueFromSetOfValuesInStorage = async (key, val) => {
+  let lastIndex = await getChromeAttr(`${key}-count`, -1);
+  let valuesToKeep = [];
+  let removedItem = false;
+  // Iterate through the existing values
+  for (let n = 0; n <= lastIndex; n++) {
+    const existingValue = await getChromeAttr(`${key}${n}`);
+    if (existingValue === val) {
+      removedItem = true;
+    } else {
+      valuesToKeep.push(existingValue);
+    }
+  }
+  // If the value was found and removed, update storage
+  if (removedItem) {
+    if (!valuesToKeep.length) {
+      removeChromeAttr(`${key}-count`);
+      removeChromeAttr(`${key}0`);
+      return;
+    }
+    // update new length
+    setChromeAttr(`${key}-count`, lastIndex-1);
+    // Update the remaining values with storage
+    let newIndex = 0;
+    valuesToKeep.forEach((newValue) => {
+      setChromeAttr(`${key}${newIndex}`, newValue);
+      newIndex++;
+    });
+    console.assert(lastIndex === newIndex);
+    // remove the last index having removed an item
+    removeChromeAttr(`${key}${newIndex}`);
+  } else { console.log("nothing to remove?") }
 };
 
 /**
@@ -70,7 +119,7 @@ const addValueToSetOfValuesInStorage = async(key, val) => {
  */
 const retrieveLastResponseOrSetNew = async(response, key, defaultVal=null) => {
   const val = response[key];
-  if (!val)  {
+  if (val === undefined)  {
     return await getChromeAttr(`last-${key}`, defaultVal);
   } else {
     setChromeAttr(`last-${key}`, val);
